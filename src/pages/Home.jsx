@@ -3,8 +3,22 @@ import { motion } from 'framer-motion'
 import ThreeBackground from '../components/ThreeBackground'
 
 function Home() {
+  const features = [
+    { icon: '🤖', title: 'AI-Powered Answers', desc: 'Get instant responses with authentic Quran and Hadith references', link: '/ask-ai' },
+    { icon: '📖', title: 'Holy Quran', desc: 'Read with translation, tafseer, and audio recitation', link: '/quran' },
+    { icon: '👨‍🏫', title: 'Verified Scholars', desc: 'Book consultations with qualified scholars from Ahlus-Sunnah', link: '/consultation' },
+    { icon: '📚', title: 'Islamic Library', desc: 'Access authentic books and educational resources', link: '/library' },
+    { icon: '🎓', title: 'Learn Islam', desc: 'Comprehensive courses on Islamic fundamentals', link: '/learn' },
+    { icon: '🛡️', title: 'Debunk Ideologies', desc: 'Counter Western ideologies with Islamic wisdom', link: '/debunk' },
+  ]
+
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
         <ThreeBackground />
         <motion.div 
@@ -20,7 +34,7 @@ function Home() {
             Get answers rooted in Quran, Hadith, and scholarly consensus. Consult verified scholars online.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/ask-ai" className="py-4 px-8 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-xl font-bold text-lg hover:scale-105 transition-transform duration-300">
+            <Link to="/ask-ai" className="py-4 px-8 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-xl font-bold text-lg hover:scale-105 transition-transform duration-300 glow-gold">
               Ask Now
             </Link>
             <Link to="/consultation" className="py-4 px-8 glass-card rounded-xl font-bold text-lg hover:scale-105 transition-transform duration-300 text-gray-900 dark:text-white">
@@ -36,40 +50,29 @@ function Home() {
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 dark:text-white">
-            Why Choose Islamic AI?
+            Explore Our Platform
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div 
-              className="glass-card p-8 rounded-2xl text-center"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <div className="text-5xl mb-4">🤖</div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">AI-Powered Answers</h3>
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">Get instant responses with authentic Quran and Hadith references</p>
-            </motion.div>
-            <motion.div 
-              className="glass-card p-8 rounded-2xl text-center"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <div className="text-5xl mb-4">👨‍🏫</div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Verified Scholars</h3>
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">Book consultations with qualified scholars from Ahlus-Sunnah</p>
-            </motion.div>
-            <motion.div 
-              className="glass-card p-8 rounded-2xl text-center"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <div className="text-5xl mb-4">📚</div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Educational Content</h3>
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">Read articles addressing modern challenges with Islamic wisdom</p>
-            </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Link to={feature.link}>
+                  <div className="glass-card p-8 rounded-2xl text-center hover-lift hover-glow cursor-pointer">
+                    <div className="text-5xl mb-4 animate-float">{feature.icon}</div>
+                    <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{feature.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{feature.desc}</p>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
-    </div>
+    </motion.div>
   )
 }
 
